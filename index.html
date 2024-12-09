@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wilson Social Styles Assessment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .question {
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .option {
+            margin: 10px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            display: none;
+        }
+        canvas {
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 5px;
+            display: block;
+        }
+        .canvas-container {
+            position: relative;
+            width: 460px;
+            height: 460px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wilson Social Styles Assessment</h1>
+    <form id="assessment">
+        <div class="question">
+            <p>1. When making decisions, I primarily rely on:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q1" value="a" required> Evidence and careful analysis</div>
+                <div class="option"><input type="radio" name="q1" value="b"> Input from others and consensus</div>
+                <div class="option"><input type="radio" name="q1" value="c"> Quick evaluation of options and results</div>
+                <div class="option"><input type="radio" name="q1" value="d"> Intuition and creative possibilities</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>2. In conflicts or challenging situations, I tend to:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q2" value="a" required> Avoid confrontation and analyze privately</div>
+                <div class="option"><input type="radio" name="q2" value="b"> Seek compromise and maintain relationships</div>
+                <div class="option"><input type="radio" name="q2" value="c"> Take control and address issues directly</div>
+                <div class="option"><input type="radio" name="q2" value="d"> Express feelings and tackle problems dramatically</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>3. My preferred way of managing time is to:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q3" value="a" required> Create detailed plans and systematic approaches</div>
+                <div class="option"><input type="radio" name="q3" value="b"> Keep relationships flowing smoothly</div>
+                <div class="option"><input type="radio" name="q3" value="c"> Focus on efficient task completion</div>
+                <div class="option"><input type="radio" name="q3" value="d"> Stay flexible and pursue what's exciting</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>4. When supporting others, I emphasize:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q4" value="a" required> Logical principles and clear thinking</div>
+                <div class="option"><input type="radio" name="q4" value="b"> Emotional support and understanding</div>
+                <div class="option"><input type="radio" name="q4" value="c"> Practical solutions and action steps</div>
+                <div class="option"><input type="radio" name="q4" value="d"> Innovation and enthusiasm</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>5. In group settings, I am most concerned with:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q5" value="a" required> Accuracy and proper procedures</div>
+                <div class="option"><input type="radio" name="q5" value="b"> Group harmony and inclusion</div>
+                <div class="option"><input type="radio" name="q5" value="c"> Achieving objectives</div>
+                <div class="option"><input type="radio" name="q5" value="d"> Energy and engagement</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>6. My natural communication style is:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q6" value="a" required> Precise and systematic</div>
+                <div class="option"><input type="radio" name="q6" value="b"> Supportive and agreeable</div>
+                <div class="option"><input type="radio" name="q6" value="c"> Direct and results-oriented</div>
+                <div class="option"><input type="radio" name="q6" value="d"> Animated and spontaneous</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>7. I gain personal value through:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q7" value="a" required> Being respected for my expertise</div>
+                <div class="option"><input type="radio" name="q7" value="b"> Being approved of by others</div>
+                <div class="option"><input type="radio" name="q7" value="c"> Being in control of outcomes</div>
+                <div class="option"><input type="radio" name="q7" value="d"> Being recognized for my contributions</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>8. My preferred work environment is one that:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q8" value="a" required> Describes processes clearly</div>
+                <div class="option"><input type="radio" name="q8" value="b"> Processes feelings and relationships</div>
+                <div class="option"><input type="radio" name="q8" value="c"> Responds to needs quickly</div>
+                <div class="option"><input type="radio" name="q8" value="d"> Collaborates creatively</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>9. When presenting ideas, I focus on:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q9" value="a" required> Detailed analysis and evidence</div>
+                <div class="option"><input type="radio" name="q9" value="b"> Building consensus and harmony</div>
+                <div class="option"><input type="radio" name="q9" value="c"> Bottom-line results</div>
+                <div class="option"><input type="radio" name="q9" value="d"> Big picture possibilities</div>
+            </div>
+        </div>
+        <div class="question">
+            <p>10. Under stress, I am likely to:</p>
+            <div class="options">
+                <div class="option"><input type="radio" name="q10" value="a" required> Withdraw and analyze</div>
+                <div class="option"><input type="radio" name="q10" value="b"> Acquiesce to maintain peace</div>
+                <div class="option"><input type="radio" name="q10" value="c"> Take autocratic control</div>
+                <div class="option"><input type="radio" name="q10" value="d"> Attack or become emotional</div>
+            </div>
+        </div>
+        <button type="button" onclick="calculateResults()">Calculate Results</button>
+    </form>
+    
+    <div id="results">
+        <h2>Your Results</h2>
+        <div class="canvas-container">
+            <canvas id="styleGrid" width="400" height="400"></canvas>
+        </div>
+        <div id="interpretation"></div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const form = document.getElementById('assessment');
+            for (let i = 1; i <= 10; i++) {
+                if (!form[`q${i}`].value) {
+                    alert(`Please answer question ${i}`);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function calculateResults() {
+            if (!validateForm()) return;
+
+            const form = document.getElementById('assessment');
+            const weights = {
+                q1: 1.5, q2: 2, q3: 1, q4: 1.5, q5: 1,
+                q6: 2, q7: 1.5, q8: 1, q9: 1, q10: 2
+            };
+            
+            let scores = { a: 0, b: 0, c: 0, d: 0 };
+            let xAxis = 0;
+            let yAxis = 0;
+
+            // Calculate raw scores
+            for (let i = 1; i <= 10; i++) {
+                const selected = form[`q${i}`].value;
+                const weight = weights[`q${i}`];
+                scores[selected] += 0.69 * weight;
+            }
+
+            // Calculate axis values
+            xAxis = Math.round(scores.c + scores.d); // Driver + Expressive
+            yAxis = Math.round(scores.a + scores.c); // Analytical + Driver
+
+            // Convert yAxis to letter (A-J)
+            const yLetter = String.fromCharCode(64 + Math.min(Math.max(yAxis, 1), 10));
+
+            // Draw grid
+            const canvas = document.getElementById('styleGrid');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw quadrants
+            ctx.fillStyle = '#0088cc';
+            ctx.fillRect(0, 0, canvas.width/2, canvas.height/2);
+            ctx.fillStyle = '#cc0000';
+            ctx.fillRect(canvas.width/2, 0, canvas.width/2, canvas.height/2);
+            ctx.fillStyle = '#00cc00';
+            ctx.fillRect(0, canvas.height/2, canvas.width/2, canvas.height/2);
+            ctx.fillStyle = '#cccc00';
+            ctx.fillRect(canvas.width/2, canvas.height/2, canvas.width/2, canvas.height/2);
+
+            // Add centered quadrant labels
+            ctx.fillStyle = 'white';
+            ctx.font = '20px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Analytical', canvas.width/4, canvas.height/4);
+            ctx.fillText('Driver', 3*canvas.width/4, canvas.height/4);
+            ctx.fillText('Amiable', canvas.width/4, 3*canvas.height/4);
+            ctx.fillText('Expressive', 3*canvas.width/4, 3*canvas.height/4);
+
+            // Add axis labels
+            ctx.fillStyle = 'black';
+            ctx.font = '14px Arial';
+            
+            // X-axis label
+            ctx.textAlign = 'center';
+            ctx.fillText('More directed (ASK) ← | → More Directive (TELL)', canvas.width/2, canvas.height + 25);
+            
+            // Y-axis label
+            ctx.save();
+            ctx.translate(-30, canvas.height/2);
+            ctx.rotate(-Math.PI/2);
+            ctx.textAlign = 'center';
+            ctx.fillText('Task Orientation (J-A)', 0, 0);
+            ctx.restore();
+
+            // Add Y-axis letters
+            ctx.textAlign = 'right';
+            for (let i = 0; i < 10; i++) {
+                const letter = String.fromCharCode(74 - i);
+                ctx.fillText(letter, -10, (i + 0.5) * (canvas.height/10));
+            }
+
+            // Add X-axis numbers
+            ctx.textAlign = 'center';
+            for (let i = 1; i <= 10; i++) {
+                ctx.fillText(i.toString(), (i - 0.5) * (canvas.width/10), canvas.height + 10);
+            }
+
+            // Plot point
+            ctx.beginPath();
+            const reversedY = ((11 - yLetter.charCodeAt(0) + 64)/10) * canvas.height;
+            ctx.arc((xAxis/10) * canvas.width, reversedY, 8, 0, Math.PI * 2);
+            ctx.fillStyle = 'black';
+            ctx.fill();
+
+            // Determine styles
+            const styleScores = [
+                {style: 'Analytical', score: scores.a},
+                {style: 'Amiable', score: scores.b},
+                {style: 'Driver', score: scores.c},
+                {style: 'Expressive', score: scores.d}
+            ];
+            
+            styleScores.sort((a, b) => b.score - a.score);
+            const primaryStyle = styleScores[0].style;
+            const secondaryStyle = styleScores[1].style;
+
+            const styleDescriptions = {
+                Analytical: "Focuses on accuracy, logic, and systematic approach. Values detailed analysis and precise thinking.",
+                Amiable: "Emphasizes relationships, harmony, and supportive environment. Values cooperation and team stability.",
+                Driver: "Prioritizes results, efficiency, and direct action. Values control and achieving objectives.",
+                Expressive: "Emphasizes enthusiasm, creativity, and spontaneity. Values recognition and interactive engagement."
+            };
+
+            document.getElementById('interpretation').innerHTML = `
+                <h3>Your Style Profile:</h3>
+                <p><strong>Primary Style:</strong> ${primaryStyle}<br>
+                ${styleDescriptions[primaryStyle]}</p>
+                <p><strong>Secondary Style:</strong> ${secondaryStyle}</p>
+                <p><strong>Grid Position:</strong> ${yLetter}${xAxis}</p>
+            `;
+
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
